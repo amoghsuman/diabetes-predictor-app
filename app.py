@@ -37,12 +37,17 @@ data = load_dataset()
 
 # Dataset overview
 st.subheader("📊 Dataset Preview")
+st.markdown("Here's a glimpse of the dataset used to train the model."
+"Each row represents a patient, and each column contains a health-related feature.")
 st.dataframe(data.head())
 st.write(f"Shape of dataset: {data.shape}")
 st.write(f"Columns: {list(data.columns)}")
 
 # EDA
 st.subheader("🔍 Data Exploration")
+st.markdown("Before building a model, it's important to check if the data is clean and complete. "
+"This section helps us identify missing values and understand the range and average of each feature.")
+
 st.markdown("#### Missing Values (if any)")
 missing_values = data.isnull().sum().sort_values(ascending=False)
 st.dataframe(missing_values.head())
@@ -51,27 +56,41 @@ st.markdown("#### Statistical Summary")
 st.dataframe(data.describe())
 
 st.subheader("📉 Pairplot Visualization")
+st.markdown("This shows how different features relate to each other."
+"Each dot represents a patient, and the colors indicate whether they had diabetes or not.")
+
 plot_path = "images/pairplot.png"
 generate_pairplot(data, output_path=plot_path)
 st.image(plot_path, caption="Seaborn Pairplot of Features Colored by Outcome", use_column_width=True)
 
 st.subheader("🧠 Feature Correlation Matrix")
+st.markdown("This heatmap highlights which health features are most related to diabetes. "
+"Darker colors mean stronger relationships.")
+
 corr_plot_path = "images/corr_heatmap.png"
 plot_correlation_matrix(data, corr_plot_path)
 st.image(corr_plot_path, caption="Correlation matrix (features with ≥0.2 correlation)", use_column_width=True)
 
 # Data Cleaning + Scaling
 st.subheader("🧼 Data Preprocessing")
+st.markdown("We clean the data by replacing missing or zero values, and transform it so that the model understands it better."
+"This step improves accuracy.")
+
 data = handle_missing_and_impute(data)
 data = handle_skewness(data)
 st.success("Zero values handled and skewed features log-transformed.")
 
 st.subheader("📈 Feature Distributions")
+st.markdown("These charts show how each feature is distributed among diabetic and non-diabetic patients.")
+
 dist_plot_path = "images/distributions.png"
 plot_feature_distributions(data, dist_plot_path)
 st.image(dist_plot_path, caption="Feature Distributions by Outcome", use_column_width=True)
 
 st.subheader("⚙️ Feature Scaling")
+st.markdown("We adjust the scale of all features so they are comparable. "
+"This helps the model learn more effectively.")
+
 scaled_data, scaler = scale_features(data)
 st.success("Feature scaling completed using StandardScaler.")
 
@@ -81,6 +100,9 @@ st.success("Pre-trained model loaded successfully.")
 
 # Evaluation
 st.subheader("✅ Model Evaluation on Sample Data")
+st.markdown("We test the model's performance on unseen data to see how well it predicts diabetes. "
+"The numbers here give us confidence in its predictions.")
+
 X_all = scaled_data[:, [0, 1, 5, 7]]
 Y_all = pd.get_dummies(scaled_data[:, 8])
 
@@ -92,6 +114,9 @@ accuracy = np.mean(Y_pred == Y_true)
 st.write(f"🧪 **Accuracy on Sample Data:** `{accuracy * 100:.2f}%`")
 
 st.subheader("📊 Confusion Matrix")
+st.markdown("This table compares the model's predictions with actual outcomes. "
+"It tells us how many patients were correctly or incorrectly classified.")
+
 cm = confusion_matrix(Y_true, Y_pred)
 fig, ax = plt.subplots(figsize=(4, 3))
 sns.heatmap(cm, annot=True, fmt="d", cmap="YlGnBu", xticklabels=["No Diabetes", "Diabetes"], yticklabels=["No Diabetes", "Diabetes"])
@@ -101,6 +126,8 @@ plt.title("Confusion Matrix")
 st.pyplot(fig)
 
 st.subheader("📋 Classification Report")
+st.markdown("This report summarizes how well the model distinguishes between diabetic and non-diabetic patients using precision, recall, and F1 score.")
+
 report = classification_report(Y_true, Y_pred, target_names=["No-Diabetes", "Diabetes"], output_dict=True)
 report_df = pd.DataFrame(report).T
 st.dataframe(report_df.style.format(precision=2))
@@ -110,6 +137,8 @@ st.markdown(f"🔵 **ROC AUC Score:** `{auc:.4f}`")
 
 # Real-Time Prediction
 st.sidebar.title("🧪 Predict Diabetes Risk")
+st.sidebar.markdown("Enter your health details below and click the button to get your predicted risk of diabetes.")
+
 st.sidebar.markdown("Enter the following health parameters:")
 
 with st.sidebar.form("user_input_form"):
@@ -146,6 +175,8 @@ if submitted:
     import matplotlib.pyplot as plt
 
     st.subheader("🧠 Why did the model predict this?")
+    st.markdown("This section explains how much each health feature contributed to your prediction. "
+    "Think of it as a reasoning behind the model’s decision.")
 
     # Prepare background
     background = X_all[:100]
