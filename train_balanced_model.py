@@ -66,9 +66,8 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X_train, Y_train_oh, epochs=50, batch_size=32, validation_data=(X_val, Y_val_oh), class_weight=class_weight_dict, verbose=1)
 
 # 10. Save model and weights
-model_json = model.to_json()
-with open("diabetes_model.json", "w") as json_file:
-    json_file.write(model_json)
+with open("model.json", "w") as json_file:
+    json_file.write(model.to_json())
 
-model.save_weights("diabetes_model.weights.h5")
-print("✅ Model saved as 'diabetes_model.json' and 'diabetes_model.weights.h5'")
+model.save_weights("model.weights.h5")
+print("✅ Model saved as 'model.json' and 'model.weights.h5'")
