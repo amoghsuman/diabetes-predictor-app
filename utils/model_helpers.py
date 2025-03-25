@@ -188,3 +188,4 @@ def load_model():
 def get_shap_explainer(model, background):
     import shap
     return shap.KernelExplainer(model.predict, background)
+
