@@ -1,0 +1,40 @@
+# Ignore virtual environments
+venv/
+.env/
+.venv/
+ENV/
+env/
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Jupyter checkpoints (if you used notebooks earlier)
+.ipynb_checkpoints/
+
+# Ignore logs and runtime files
+*.log
+*.sqlite3
+.DS_Store
+
+# Ignore model checkpoints and temp files
+*.h5
+*.hdf5
+*.ckpt
+*.pb
+*.tflite
+*.bak
+
+# VS Code files
+.vscode/
+
+# Streamlit cache
+.streamlit/
+
+# System specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
