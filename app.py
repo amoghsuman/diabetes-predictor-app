@@ -29,7 +29,8 @@ from utils.model_helpers import (
 from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score
 
 # Title and intro
-st.title("🧠 Diabetes Prediction using AI (Keras)")
+#Keras library would be used
+st.title("🧠 AI Driven Diabetes Prediction")
 st.markdown("This app predicts the likelihood of diabetes based on health parameters.")
 
 # Load and clean data
