@@ -1,0 +1,11 @@
+streamlit>=1.24.0
+numpy>=1.24.0
+pandas>=1.5.3
+scikit-learn>=1.2.2
+matplotlib>=3.7.1
+seaborn>=0.12.2
+shap>=0.42.1
+plotly>=5.15.0
+h5py>=3.8.0
+keras>=2.11.0
+tensorflow>=2.11.0
