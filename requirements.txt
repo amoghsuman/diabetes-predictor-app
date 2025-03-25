@@ -9,3 +9,4 @@ plotly>=5.15.0
 h5py>=3.8.0
 keras>=2.11.0
 tensorflow>=2.11.0
+imbalanced-learn>=0.10.1
