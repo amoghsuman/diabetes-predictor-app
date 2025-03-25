@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import os
 
 from keras.models import model_from_json
 from keras.models import Sequential
@@ -178,10 +179,17 @@ from keras.models import model_from_json
 
 @st.cache_resource
 def load_model():
-    with open("model.json", "r") as json_file:
-        model_json = json_file.read()
-    model = model_from_json(model_json)
-    model.load_weights("model.weights.h5")
+    model_path = "model.json"
+    weights_path = "model.weights.h5"
+
+    if not os.path.exists(model_path) or not os.path.exists(weights_path):
+        raise FileNotFoundError("❌ model.json or model.weights.h5 not found in the root directory.")
+
+    with open(model_path, "r") as json_file:
+        loaded_model_json = json_file.read()
+
+    model = model_from_json(loaded_model_json)
+    model.load_weights(weights_path)
     return model
 
 @st.cache_resource
