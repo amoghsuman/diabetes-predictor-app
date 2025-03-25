@@ -61,7 +61,7 @@ st.markdown("This shows how different features relate to each other."
 
 plot_path = "images/pairplot.png"
 generate_pairplot(data, output_path=plot_path)
-st.image(plot_path, caption="Seaborn Pairplot of Features Colored by Outcome", use_column_width=True)
+st.image(plot_path, caption="Seaborn Pairplot of Features Colored by Outcome", use_container_width=True)
 
 st.subheader("🧠 Feature Correlation Matrix")
 st.markdown("This heatmap highlights which health features are most related to diabetes. "
@@ -69,7 +69,7 @@ st.markdown("This heatmap highlights which health features are most related to d
 
 corr_plot_path = "images/corr_heatmap.png"
 plot_correlation_matrix(data, corr_plot_path)
-st.image(corr_plot_path, caption="Correlation matrix (features with ≥0.2 correlation)", use_column_width=True)
+st.image(corr_plot_path, caption="Correlation matrix (features with ≥0.2 correlation)", use_container_width=True)
 
 # Data Cleaning + Scaling
 st.subheader("🧼 Data Preprocessing")
@@ -85,7 +85,7 @@ st.markdown("These charts show how each feature is distributed among diabetic an
 
 dist_plot_path = "images/distributions.png"
 plot_feature_distributions(data, dist_plot_path)
-st.image(dist_plot_path, caption="Feature Distributions by Outcome", use_column_width=True)
+st.image(dist_plot_path, caption="Feature Distributions by Outcome", use_container_width=True)
 
 st.subheader("⚙️ Feature Scaling")
 st.markdown("We adjust the scale of all features so they are comparable. "
